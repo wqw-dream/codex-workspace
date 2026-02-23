@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Printable Doc Studio</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Printable Doc Studio</h1>
+      <p>输入内容并即时预览可打印文档（A4 / A5）。</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls">
+        <h2>素材与设置</h2>
+        <form id="generator-form">
+          <label>
+            文本内容
+            <textarea name="text" id="text" rows="8" placeholder="输入文档文字内容..."></textarea>
+          </label>
+
+          <label>
+            图片素材
+            <input type="file" name="image" id="image" accept="image/*" />
+          </label>
+
+          <div class="row">
+            <label>
+              纸张尺寸
+              <select name="paper_size" id="paper_size">
+                {% for size in paper_presets.keys() %}
+                <option value="{{ size }}">{{ size }}</option>
+                {% endfor %}
+              </select>
+            </label>
+
+            <label>
+              背景风格
+              <select name="background_style" id="background_style">
+                {% for bg in background_presets %}
+                <option value="{{ bg }}">{{ bg }}</option>
+                {% endfor %}
+              </select>
+            </label>
+
+            <label>
+              视觉样式
+              <select name="visual_style" id="visual_style">
+                {% for style in style_presets %}
+                <option value="{{ style }}">{{ style }}</option>
+                {% endfor %}
+              </select>
+            </label>
+          </div>
+
+          <button type="submit">生成预览</button>
+        </form>
+      </section>
+
+      <section class="panel preview-wrap">
+        <div class="preview-head">
+          <h2>即时预览</h2>
+          <button id="print-btn" type="button">打印</button>
+        </div>
+
+        <article id="preview" class="preview paper-a4 bg-plain style-clean">
+          <h3>文档标题</h3>
+          <p class="empty">这里会显示你的文档预览内容。</p>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
